@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     Validate v(l);
 
     v.isValidLicense() ? qDebug() << "Valid License" : qDebug() << "Invalid License" ;
+    l->printLicenseHash();
 
     return a.exec();
 }
