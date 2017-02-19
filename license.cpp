@@ -10,15 +10,12 @@
 
 void License::printLicenseHash() const
 {
-    std::string str = _licenseHash.toStdString();
-    std::cout << "[ " << str << " ]";
-
-    qDebug() << QString::fromStdString(str);
+    qDebug() << _licenseHash;
 }
 
-QByteArray License::generateLicenseHash(QByteArray addr)
+uint License::generateLicenseHash(QString addr)
 {
-    return QCryptographicHash::hash(addr, QCryptographicHash::Md4);
+    return qHash(addr);
 }
 
 void License::saveToFile(QString fileName, QString path)
@@ -32,9 +29,7 @@ void License::saveToFile(QString fileName, QString path)
     }
 
     QTextStream stream(&file);
-    foreach(char c, _licenseHash) {
-        stream << c;
-    }
+    stream << _licenseHash;
 }
 
 QDate License::getExpiryDate() const
@@ -42,7 +37,7 @@ QDate License::getExpiryDate() const
     return _expiryDate;
 }
 
-QByteArray License::getLicenseHash() const
+uint License::getLicenseHash() const
 {
     return _licenseHash;
 }

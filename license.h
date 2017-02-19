@@ -11,7 +11,7 @@ class License
 public:
     // Constructors
     License() :
-        _macAddress(""), _expiryDate(QDate::currentDate()), _licenseHash("")
+        _macAddress(""), _expiryDate(QDate::currentDate()), _licenseHash(000)
     {
         saveToFile(QString("test.txt"));
     }
@@ -19,7 +19,7 @@ public:
     License(QString mac):
         _macAddress(mac), _expiryDate(QDate::currentDate())
     {
-        _licenseHash = generateLicenseHash(_macAddress.toUtf8());
+        _licenseHash = generateLicenseHash(_macAddress);
         saveToFile(QString("test.txt"));
     }
 
@@ -27,7 +27,7 @@ public:
         _macAddress(mac),
         _expiryDate(expiry)
     {
-        _licenseHash = generateLicenseHash(_macAddress.toUtf8());
+        _licenseHash = generateLicenseHash(_macAddress);
         saveToFile(QString("test.txt"));
     }
 
@@ -35,24 +35,24 @@ public:
     void printLicenseHash() const;
 
     // Generate the Hash from a MAC addr
-    QByteArray generateLicenseHash(QByteArray addr);
+    uint generateLicenseHash(QString addr);
 
     // Write the generated license hash and expiry date to a file
     void saveToFile(QString fileName, QString path=QDir::homePath());
 
     // Getter methods
+    uint getLicenseHash() const;
     QDate getExpiryDate() const;
     QString getMacAddress() const;
-    QByteArray getLicenseHash() const;
 
     // Setter methods
     void setExpiryDate(QDate date);
     void setMacAddress(QString mac);
 
 private:
+    uint _licenseHash;
     QDate _expiryDate;
     QString _macAddress;
-    QByteArray _licenseHash;
 };
 
 #endif // LICENSE_H
