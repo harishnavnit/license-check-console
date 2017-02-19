@@ -10,7 +10,7 @@
 
 void License::printLicenseHash() const
 {
-    qDebug() << _licenseHash;
+    qDebug() << m_licenseHash;
 }
 
 uint License::generateLicenseHash(QString addr)
@@ -29,30 +29,30 @@ void License::saveToFile(QString fileName, QString path)
     }
 
     QTextStream stream(&file);
-    stream << _licenseHash;
+    stream << m_licenseHash;
 }
 
 QDate License::getExpiryDate() const
 {
-    return _expiryDate;
+    return m_expiryDate;
 }
 
 uint License::getLicenseHash() const
 {
-    return _licenseHash;
+    return m_licenseHash;
 }
 
 QString License::getMacAddress() const
 {
-    return _macAddress;
+    return m_macAddress;
 }
 
 void License::setExpiryDate(QDate expiry)
 {
-    _expiryDate = expiry;
+    m_expiryDate = expiry;
 }
 
 void License::setMacAddress(QString mac)
 {
-    _macAddress = mac;
+    m_macAddress = mac;
 }

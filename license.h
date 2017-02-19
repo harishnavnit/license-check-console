@@ -11,23 +11,22 @@ class License
 public:
     // Constructors
     License() :
-        _macAddress(""), _expiryDate(QDate::currentDate()), _licenseHash(000)
+        m_macAddress(""), m_expiryDate(QDate::currentDate()), m_licenseHash(000)
     {
         saveToFile(QString("test.txt"));
     }
 
     License(QString mac):
-        _macAddress(mac), _expiryDate(QDate::currentDate())
+        m_macAddress(mac), m_expiryDate(QDate::currentDate())
     {
-        _licenseHash = generateLicenseHash(_macAddress);
+        m_licenseHash = generateLicenseHash(m_macAddress);
         saveToFile(QString("test.txt"));
     }
 
     License(QString mac, QDate expiry) :
-        _macAddress(mac),
-        _expiryDate(expiry)
+        m_macAddress(mac), m_expiryDate(expiry)
     {
-        _licenseHash = generateLicenseHash(_macAddress);
+        m_licenseHash = generateLicenseHash(m_macAddress);
         saveToFile(QString("test.txt"));
     }
 
@@ -50,9 +49,9 @@ public:
     void setMacAddress(QString mac);
 
 private:
-    uint _licenseHash;
-    QDate _expiryDate;
-    QString _macAddress;
+    uint m_licenseHash;
+    QDate m_expiryDate;
+    QString m_macAddress;
 };
 
 #endif // LICENSE_H
